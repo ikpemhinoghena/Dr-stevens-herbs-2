@@ -1,0 +1,6 @@
+desktop-check.png
+mobile-check.png
+*-check.png
+*.tar.gz
+.sites-runtime/
+node_modules/

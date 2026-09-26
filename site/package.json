@@ -1,0 +1,1 @@
+{"name":"dr-stevens-herbs","private":true,"type":"module","scripts":{"build":"node build.mjs","start":"node server.mjs","test":"node verify.mjs"}}
