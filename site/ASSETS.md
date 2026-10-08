@@ -12,3 +12,7 @@ Final prompt:
 # Existing homepage photograph
 
 `dist/assets/hero.jpg` — Danielle Suijkerbuijk / Unsplash. Source: https://unsplash.com/photos/a-mortar-filled-with-green-leaves-on-top-of-a-table-Eza6E_v2ZYo . Used under the Unsplash License.
+
+# Official Product Photographs
+
+- `dist/assets/life-herbal-plus.jpeg` — Life Herbal Plus by Steven 400g Powder Mixture bottle image.

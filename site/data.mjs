@@ -1,29 +1,137 @@
-export const topics = ['Cancer','Herpes','Lupus','Diabetes','High blood pressure','Arthritis','Digestive concerns','Skin concerns','Sleep concerns','Stress and wellbeing','Respiratory concerns','Kidney health','Liver health','Women’s health','Men’s health','General wellbeing'];
+export const topics = [
+  'Infections & PID',
+  'Cancer',
+  'Herpes',
+  'Lupus',
+  'Diabetes',
+  'High blood pressure',
+  'Arthritis',
+  'Digestive concerns',
+  'Skin concerns',
+  'Sleep concerns',
+  'Stress and wellbeing',
+  'Respiratory concerns',
+  'Kidney health',
+  'Liver health',
+  'Women’s health',
+  'Men’s health',
+  'General wellbeing'
+];
 export const slug = s => s.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
 export const products = [
   {
-    "id": "dried-leaf-collection",
-    "name": "Agbo (to be changed to real one)",
-    "type": "Bottled",
-    "category": "Agbo",
-    "tone": "olive",
-    "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
-    "tag": "CANCER CURE",
+    "id": "life-herbal-plus",
+    "name": "Life Herbal Plus by Steven",
+    "type": "Powder Mixture",
+    "category": "Powder Mixture",
+    "tone": "green",
+    "weight": "400g",
+    "tag": "FAST CURE: INFECTIONS & PID",
+    "tagline": "Fast herbal cure for infections, Staph, PID & Fallopian blockage",
+    "desc": "A potent therapeutic botanical powder mixture formulated by Dr Stevens. Expertly compounded from deep-acting African roots, cleansing barks, and active rhizomes (including fortified Zingiber and medicinal bitters) to eradicate persistent systemic and reproductive tract infections. Target-crafted for stubborn Urinary Tract Infections (UTI), Staphylococcus, Gonorrhea, Syphilis, Candidiasis, and Chlamydia, while working deeply to resolve Pelvic Inflammatory Disease (PID), clear Fallopian tube blockages, and suppress Herpes flare-ups. Each 400g airtight bottle delivers a traditional concentrated herbal course designed to cleanse the bloodstream, balance mucosal flora, and restore reproductive vitality.",
     "reference": "Herb 01",
-    "image": "/assets/agbo-bottles.jpeg",
-    "imageAlt": "Two dark bottles with sealed red caps"
+    "image": "/assets/life-herbal-plus.jpeg",
+    "imageAlt": "Life Herbal Plus by Steven - 400g Powder Mixture sealed bottle",
+    "ailments": [
+      "Urinary Tract Infection (UTI)",
+      "Staphylococcus",
+      "Gonorrhea",
+      "Syphilis",
+      "Candidiasis",
+      "Chlamydia",
+      "Pelvic Inflammatory Diseases (PID)",
+      "Fallopian Tube Blockage",
+      "Herpes"
+    ],
+    "usage": "Take as guided by Dr Stevens according to your specific condition and body weight. Typically 1 level measuring spoon stirred into a glass of warm boiled water, unsweetened herbal tea, or warm light pap twice daily (morning and evening). Drink consistently for the full duration of your recommended course. Dr Stevens will provide personalized guidance tailored to your symptom history.",
+    "suitability": "Ideal for adults seeking strong, natural botanical defense against acute or recurrent infections. Suitable for both men and women. Dr Stevens provides free one-on-one WhatsApp guidance to discuss your specific symptoms, confirm suitability, answer questions about any conventional antibiotics or medications you are taking, and guide your dosage.",
+    "ingredientsInfo": "100% pure wild-harvested African roots, fortified medicinal ginger (Zingiber officinale), antimicrobial botanical bitters, and active cleansing barks. Finely milled into an active, easy-to-dissolve herbal powder. Free from artificial fillers, chemicals, or synthetic preservatives. Batch-sealed in an airtight 400g bottle."
+  },
+  {
+    "id": "dried-leaf-collection",
+    "name": "Dr Stevens HPV, Warts & Cancer Botanical Decoction",
+    "type": "Bottled",
+    "category": "Botanical Decoction",
+    "tone": "olive",
+    "tag": "FAST CURE: HPV, WARTS & CANCERS",
+    "tagline": "Antiviral cleansing for HPV, asymptomatic infections, warts & cancer defense",
+    "desc": "An intensive, deep-acting African botanical decoction masterfully prepared by Dr Stevens. Specially formulated from rare wild-harvested antiviral barks, cytotoxic healing roots, and cellular-cleansing leaves traditional practitioners have long trusted to combat Human Papillomavirus (HPV), eradicate stubborn internal and external warts, clear asymptomatic viral carriers, and fortify immune defense against abnormal cellular growths and cancers. Brewed and bottled into a potent, concentrated liquid extract designed to neutralize cellular pathogens, detoxify the bloodstream, and re-energize the body's natural defense systems.",
+    "reference": "Herb 02",
+    "image": "/assets/cancer1.jpeg",
+    "images": [
+      "/assets/cancer1.jpeg",
+      "/assets/cancer-2.jpeg",
+      "/assets/cancer-3.jpeg"
+    ],
+    "imageAlt": "Dr Stevens HPV, Warts and Cancer Botanical Decoction bottles",
+    "ailments": [
+      "HPV (Human Papillomavirus)",
+      "Asymptomatic Viral Infections",
+      "Genital & Skin Warts",
+      "Cancers & Abnormal Cellular Growth",
+      "Immune System Fortification"
+    ],
+    "usage": "Administer as specifically directed by Dr Stevens for your viral or cellular diagnosis. Typically 1 standard shot glass (approx. 50ml) taken twice daily (morning and evening) on an empty stomach. Drink consistently throughout your recommended cycle. For localized warts, Dr Stevens will advise safe topical application alongside the oral cleansing course.",
+    "suitability": "Formulated for adults diagnosed with HPV, recurring warts, asymptomatic viral carrier states, or those seeking deep botanical immune restoration alongside medical care. Consultation with Dr Stevens is completely free to evaluate your symptom history, stage, and suitability before ordering.",
+    "ingredientsInfo": "100% natural wild-extracted African medicinal roots, immune-modulating tree barks, bitter cellular purifiers, and active bioflavonoids. Slow-extracted in pure water without alcohol, artificial chemicals, preservatives, or colorants. Freshly sealed with tamper-evident caps."
   },
   {
     "id": "fresh-botanical-collection",
-    "name": "Agbo (to be changed to real one)",
-    "type": "Packaged",
-    "category": "Agbo",
-    "tone": "green",
-    "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
-    "tag": "LUPUS CURE",
-    "reference": "Herb 02",
-    "image": "/assets/agbo-pouches.jpeg",
-    "imageAlt": "Three sealed gold pouches"
+    "name": "Dr Stevens Lupus & Autoimmune Botanical Formula",
+    "type": "Packaged & Bottled",
+    "category": "Botanical Compound",
+    "tone": "gold",
+    "tag": "FAST CURE: LUPUS & AUTOIMMUNE RELIEF",
+    "tagline": "Deep restorative remission formula for Systemic Lupus & chronic inflammation",
+    "desc": "An advanced, multi-phase African botanical therapy compounded by Dr Stevens to naturally modulate hyperactive immune responses and reverse chronic autoimmune damage. Handcrafted from rare wild-harvested immunoregulatory tree barks, anti-inflammatory whole roots, and cell-reparative mountain herbs. Specifically formulated to target Systemic Lupus Erythematosus (SLE), discoid lupus skin rashes, debilitating joint stiffness, and chronic inflammatory tissue stress. This dual-action course combines water-soluble golden powder infusions with a concentrated herbal decoction to cool cellular blood heat, protect kidney and microvascular health, and guide the body toward sustained remission without toxic immune suppression.",
+    "reference": "Herb 03",
+    "image": "/assets/lupus1.jpeg",
+    "images": [
+      "/assets/lupus1.jpeg",
+      "/assets/lupus-2.jpeg"
+    ],
+    "imageAlt": "Dr Stevens Lupus botanical pouches and liquid decoction course",
+    "ailments": [
+      "Systemic Lupus Erythematosus (SLE)",
+      "Autoimmune Flare-ups & Inflammation",
+      "Chronic Joint Pain & Swelling",
+      "Skin Lesions & Butterfly Rash",
+      "Chronic Fatigue & Tissue Damage",
+      "Immune System Balancing & Remission"
+    ],
+    "usage": "Follow Dr Stevens' personalized protocol tailored to your symptom severity and flare frequency. Typically involves taking 1 level spoon of the botanical gold powder infused in warm water in the morning, followed by 50ml of the concentrated liquid decoction in the evening before bed. Maintain consistently through your guided cycle. Dr Stevens provides continuous WhatsApp monitoring.",
+    "suitability": "Formulated for adults diagnosed with Systemic Lupus Erythematosus (SLE), suspected autoimmune flare-ups, or persistent chronic inflammation. Completely free consultation is provided by Dr Stevens to review your current medical treatments, lab values, and symptom history to customize your dosage.",
+    "ingredientsInfo": "100% wild-harvested African immunomodulatory tree barks, cellular anti-inflammatory roots, bioactive flavonoids, and natural blood-purifying bitters. Milled and extracted under sterile conditions with zero steroids, synthetic chemicals, preservatives, or artificial additives."
+  },
+  {
+    "id": "diabetes-vitality-formula",
+    "name": "Dr Stevens Diabetes, Erectile Dysfunction & Hepatitis B Botanical Decoction",
+    "type": "Bottled",
+    "category": "Botanical Decoction",
+    "tone": "clay",
+    "tag": "FAST CURE: DIABETES, ED & HEPATITIS B",
+    "tagline": "Restorative herbal cleanser for Diabetes (Types 1-4), Hepatitis B & male vitality",
+    "desc": "A powerhouse triple-action botanical decoction masterfully formulated by Dr Stevens to address interlinked metabolic, hepatic, and vascular conditions. Compounded from deep-cleansing African bitter roots, hepatoprotective barks, and circulation-invigorating wild rhizomes. Engineered to stimulate pancreatic beta cells, regenerate cellular insulin sensitivity, and restore glycemic control across Type 1, Type 2, Type 3, Type 4 Diabetes, and Pre-diabetes. In parallel, it actively suppresses Hepatitis B viral replication, detoxifies liver parenchyma, and removes microvascular blockages to restore penile blood flow and conquer erectile dysfunction naturally.",
+    "reference": "Herb 04",
+    "image": "/assets/dibetes-1.jpeg",
+    "images": [
+      "/assets/dibetes-1.jpeg",
+      "/assets/dibetes-2.jpeg"
+    ],
+    "imageAlt": "Dr Stevens Diabetes, Erectile Dysfunction and Hepatitis B botanical bottles",
+    "ailments": [
+      "Diabetes Type 1",
+      "Diabetes Type 2",
+      "Type 3 Diabetes",
+      "Type 4 Diabetes",
+      "Pre-diabetes & Metabolic Balance",
+      "Erectile Dysfunction (ED) & Male Vitality",
+      "Hepatitis B & Liver Cellular Detox",
+      "Blood Sugar Regulation & Vascular Health"
+    ],
+    "usage": "Administer as directed by Dr Stevens according to your blood glucose readings and health goals. Typically 1 measuring cup (50ml) taken twice daily—30 minutes before breakfast and 30 minutes before dinner. Blood sugar levels should be checked regularly as the pancreas and insulin receptors regain natural equilibrium.",
+    "suitability": "Designed for men and women dealing with elevated blood sugar, all stages of diabetes, chronic Hepatitis B, or men experiencing diabetic-related erectile dysfunction and low stamina. Dr Stevens offers free one-on-one WhatsApp guidance to discuss your test results, confirm suitability, and oversee your regimen.",
+    "ingredientsInfo": "100% pure wild-harvested African bitter roots, potent hepatoprotective tree barks, nitric-oxide enhancing rhizomes, and cellular antioxidants. Traditional aqueous extraction without alcohol, sugar, synthetic chemicals, or preservatives. Freshly bottled in food-grade, tamper-evident containers."
   },
   {
     "id": "root-and-bark-collection",
@@ -33,9 +141,10 @@ export const products = [
     "tone": "clay",
     "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
     "tag": "HERPES CURE",
-    "reference": "Herb 03",
+    "reference": "Herb 05",
     "image": "/assets/agbo-bottles.jpeg",
-    "imageAlt": "Two dark bottles with sealed red caps"
+    "imageAlt": "Two dark bottles with sealed red caps",
+    "isTemporary": true
   },
   {
     "id": "botanical-powder-collection",
@@ -45,9 +154,10 @@ export const products = [
     "tone": "gold",
     "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
     "tag": "DIABETES REMEDY",
-    "reference": "Herb 04",
+    "reference": "Herb 06",
     "image": "/assets/agbo-pouches.jpeg",
-    "imageAlt": "Three sealed gold pouches"
+    "imageAlt": "Three sealed gold pouches",
+    "isTemporary": true
   },
   {
     "id": "herbal-infusion-collection",
@@ -57,9 +167,10 @@ export const products = [
     "tone": "rose",
     "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
     "tag": "BLOOD PRESSURE SUPPORT",
-    "reference": "Herb 05",
+    "reference": "Herb 07",
     "image": "/assets/agbo-bottles.jpeg",
-    "imageAlt": "Two dark bottles with sealed red caps"
+    "imageAlt": "Two dark bottles with sealed red caps",
+    "isTemporary": true
   },
   {
     "id": "botanical-oil-collection",
@@ -69,8 +180,9 @@ export const products = [
     "tone": "amber",
     "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
     "tag": "ARTHRITIS RELIEF",
-    "reference": "Herb 06",
+    "reference": "Herb 08",
     "image": "/assets/agbo-pouches.jpeg",
-    "imageAlt": "Three sealed gold pouches"
+    "imageAlt": "Three sealed gold pouches",
+    "isTemporary": true
   }
 ];

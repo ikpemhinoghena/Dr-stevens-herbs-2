@@ -10,7 +10,7 @@ Update `data.mjs` with verified product names, botanical identities, ingredients
 
 Supply official social links, clinician biography and credentials, business address/hours, delivery/payment/return terms, and finalized privacy details before public commercial launch. The current deployment is private for review. SEO includes server-delivered HTML, page titles/descriptions, canonical URLs, Organization data, robots and sitemap. Change the origin in `build.mjs` when adopting a custom domain. No card payment processor, inventory system or appointment booking backend is connected.
 
-Navigation compacts into a floating sticky bar after 140px of scrolling, except on checkout. The fixed-height shell prevents layout shifts. The homepage scroll cue links to the collections and supports reduced motion. `navigation-check.mjs` checks this behavior, mobile overflow, focus and current consultation/copy requirements. Footer social icons are non-link placeholders until official URLs are provided; no invented accounts or broken links are used.
+Navigation compacts into a floating sticky bar after 140px of scrolling, except on checkout. The fixed-height shell prevents layout shifts. The homepage scroll cue links to the collections and supports reduced motion. `navigation-check.mjs` checks this behavior, mobile overflow, focus and current consultation/copy requirements. Footer Facebook and TikTok links use the URLs supplied by the owner; Instagram and YouTube remain placeholders until their URLs are provided.
 
 ## Images and medical references
 
