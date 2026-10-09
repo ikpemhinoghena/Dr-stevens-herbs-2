@@ -1,5 +1,6 @@
 // Small, consistent line icons. Decorative icons always accompany accessible labels.
 const paths={
+ pinterest:'<circle cx="12" cy="12" r="9"/><path d="m9 20 3-12M10.5 14c1 2 5 2 6-2 1-4-2-6-5-5-3 1-4 5-2 6"/>',
  bag:'<path d="M6 7h12l2 14H4L6 7Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
  leaf:'<path d="M20 4c0 10-4 16-10 16a6 6 0 0 1-6-6C4 8 10 4 20 4Z"/><path d="m4 20 11-11"/>',
  chat:'<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.8-5A9 9 0 1 1 21 11Z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/>',
