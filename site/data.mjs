@@ -186,18 +186,30 @@ export const products = [
     "ingredientsInfo": "100% whole wild-harvested African analgesic roots, anti-inflammatory tree barks, and therapeutic resinous rhizomes steeping in purified botanical extract. Contains zero chemical painkillers, steroids, artificial preservatives, or synthetic additives. Hand-bottled in food-grade bottles with airtight seal caps."
   },
   {
-    "id": "root-and-bark-collection",
-    "name": "Agbo (to be changed to real one)",
-    "type": "Bottled",
-    "category": "Agbo",
+    "id": "direct-herpes-cure",
+    "name": "Direct Herpes Cure",
+    "type": "Bottled & Topical",
+    "category": "Botanical Decoction",
     "tone": "clay",
-    "desc": "Speak with Dr Stevens about this Agbo listing. Confirm the actual herb name, ingredients, preparation, pack size and price before ordering.",
-    "tag": "HERPES CURE",
+    "tag": "DIRECT HERPES CURE",
+    "tagline": "Dual-action oral extract & topical paste for HSV-1 & HSV-2 viral suppression & rapid healing",
+    "desc": "An intensive dual-action African botanical therapy compounded by Dr Stevens for rapid viral suppression and cellular tissue recovery from Herpes Simplex Virus (HSV-1 and HSV-2). Prepared from deep-acting wild antiviral tree barks, neural-soothing roots, and active bio-cleansing bitters. Formulated to neutralize active viral replication, purify lymphatic fluids, stop agonizing nerve tingling and burning sensations, clear painful genital or oral blister outbreaks, and build long-term immune resilience against future flare-ups. Supplied as concentrated oral botanical extract bottles paired with a soothing, fast-healing topical herbal compound.",
     "reference": "Herb 07",
-    "image": "/assets/agbo-bottles.jpeg",
-    "imageAlt": "Two dark bottles with sealed red caps",
-    "isTemporary": true
-  },
+    "image": "/assets/direct-herpes.jpeg",
+    "imageAlt": "Direct Herpes Cure oral botanical extract bottles and topical healing compound",
+    "ailments": [
+      "Herpes Simplex Virus 1 (HSV-1 Cold Sores)",
+      "Herpes Simplex Virus 2 (HSV-2 Genital Herpes)",
+      "Nerve Tingling, Burning & Neuralgia",
+      "Active Blister & Lesion Healing",
+      "Recurrent Outbreak Suppression",
+      "Lymphatic Detoxification & Immune Fortification"
+    ],
+    "usage": "Administer the concentrated liquid decoction orally twice daily (50ml morning and evening) before meals as guided by Dr Stevens. Gently apply a thin layer of the accompanying topical herbal paste directly over active sores or tingling areas twice daily to rapidly dry blisters and soothe nerve pain.",
+    "suitability": "Formulated for adults diagnosed with HSV-1, HSV-2, recurrent blister outbreaks, or asymptomatic viral carrier status seeking sustained viral remission. Consultation with Dr Stevens is 100% free on WhatsApp to evaluate your outbreak history, confirm suitability, and tailor your regimen.",
+    "ingredientsInfo": "100% pure wild-harvested African antiviral roots, neural-calming tree barks, bioactive flavonoids, and topical restorative botanical resins. Natural aqueous extraction with zero synthetic additives, alcohol, or preservatives. Packaged fresh with tamper-evident caps."
+  }
+  /* ,
   {
     "id": "botanical-powder-collection",
     "name": "Agbo (to be changed to real one)",
@@ -211,4 +223,5 @@ export const products = [
     "imageAlt": "Three sealed gold pouches",
     "isTemporary": true
   }
+  */
 ];
