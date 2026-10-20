@@ -61,7 +61,7 @@ function initCheckout(){
   $('#checkout-review').focus();$('#checkout-review').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
  });
  $('#edit-checkout').addEventListener('click',()=>{showCheckoutForm();$('#customer-name').focus()});
- $('#checkout-send').addEventListener('click',e=>{if(!checkoutReady||!checkoutMessage){e.preventDefault();toast('Please review your order enquiry first.');return}$('#handoff-note').hidden=false;});
+ $('#checkout-send').addEventListener('click',e=>{if(!checkoutReady||!checkoutMessage){e.preventDefault();toast('Please review your order enquiry first.');return}$('#handoff-note').hidden=true;});
  $('#copy-order').addEventListener('click',async()=>{if(!checkoutReady)return;try{await navigator.clipboard.writeText(checkoutMessage);toast('Order message copied. Paste it into your chat with Dr Stevens.')}catch{$('.message-details').open=true;const selection=getSelection();const range=document.createRange();range.selectNodeContents($('#order-message'));selection.removeAllRanges();selection.addRange(range);$('#order-message').scrollIntoView({block:'center'});toast('Select and copy the message shown below.')}});
 }
 initCheckout();if(catalogue.length)window.renderShoppingBag();

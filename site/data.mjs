@@ -17,7 +17,7 @@ export const topics = [
   'Men’s health',
   'General wellbeing'
 ];
-export const slug = s => s.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
+export const slug = s => s.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/-$/, '');
 export const products = [
   {
     "id": "life-herbal-plus",
