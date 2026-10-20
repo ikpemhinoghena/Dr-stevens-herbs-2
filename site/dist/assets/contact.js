@@ -22,21 +22,23 @@ document.addEventListener('click',e=>{
  dialog.showModal();
 });
 for(const form of document.querySelectorAll('.story-form')){
- const status=form.querySelector('.story-status'),button=form.querySelector('button[type=submit]');let sending=false;
+ const status=form.querySelector('.story-status'),button=form.querySelector('button[type=submit]'),cancel=form.querySelector('.story-cancel'),panel=form.closest('.story-share'),confirmation=panel.nextElementSibling;let sending=false;
+ cancel.addEventListener('click',()=>{panel.open=false;panel.querySelector('summary').focus()});
+ panel.addEventListener('toggle',()=>{if(panel.open)confirmation.hidden=true});
  form.addEventListener('input',()=>{if(!sending)status.hidden=true});
  form.addEventListener('submit',async e=>{
   e.preventDefault();if(sending||!form.reportValidity())return;
   for(const name of ['name','description']){const field=form.elements.namedItem(name);if(!field.value.trim()){field.setCustomValidity('Please complete this field.');field.reportValidity();field.addEventListener('input',()=>field.setCustomValidity(''),{once:true});return}}
   if(form.elements.namedItem('botcheck').checked)return;
   const data=Object.fromEntries(new FormData(form));delete data.botcheck;data.source_page=location.origin+location.pathname;
-  sending=true;button.disabled=true;button.textContent='Submitting…';form.setAttribute('aria-busy','true');status.hidden=false;status.textContent='Sending your message…';
+  sending=true;button.disabled=true;cancel.disabled=true;button.textContent='Submitting…';form.setAttribute('aria-busy','true');status.hidden=false;status.textContent='Sending your message…';
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),20000);
   try{
    const response=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data),signal:controller.signal});
    const result=await response.json();if(!response.ok||result.success!==true)throw new Error('Submission rejected');
-   form.reset();status.textContent='Thank you. Your message has been submitted to Dr Stevens. Nothing is published automatically.';
+   form.reset();status.hidden=true;confirmation.textContent='Thank you. Your message has been submitted to Dr Stevens. Nothing is published automatically.';confirmation.hidden=false;panel.open=false;panel.querySelector('summary').focus();
   }catch{status.textContent='We could not confirm your submission. Your message is still here. Please try again, or contact Dr Stevens if the problem continues.';}
-  finally{clearTimeout(timeout);sending=false;button.disabled=false;button.textContent='Submit';form.removeAttribute('aria-busy');}
+  finally{clearTimeout(timeout);sending=false;button.disabled=false;cancel.disabled=false;button.textContent='Submit';form.removeAttribute('aria-busy');}
  });
 }
 })();
