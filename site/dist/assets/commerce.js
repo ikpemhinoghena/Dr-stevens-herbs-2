@@ -66,3 +66,6 @@ function initCheckout(){
 }
 initCheckout();if(catalogue.length)window.renderShoppingBag();
 
+
+// Suggest the browser's explicitly configured region; never overwrite a chosen country.
+(()=>{const select=document.getElementById('customer-country');if(!select||select.value)return;const names=new Intl.DisplayNames(['en'],{type:'region'});for(const language of navigator.languages||[navigator.language]){try{const region=new Intl.Locale(language).region;if(!region)continue;const name=names.of(region);if([...select.options].some(option=>option.value===name)){select.value=name;const hint=document.getElementById('country-hint');if(hint)hint.textContent='Suggested from your browser region. Please confirm your delivery country.';break}}catch{}}})();
