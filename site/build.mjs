@@ -4,7 +4,7 @@ import fs from 'node:fs';import {pathToFileURL} from 'node:url';import {products
 export function buildSite(products=seedProducts, output='dist') {
 fs.mkdirSync(output+'/assets',{recursive:true});
 const origin=process.env.PUBLIC_ORIGIN||'https://dr-stevens-herbs.greatyoyo.chatgpt.site';
-const wa=(message='Hello Dr Stevens Herbs, I would like to ask about a consultation.')=>'https://wa.me/18484487130?text='+encodeURIComponent(message);
+const wa=(message='Hello Dr Stevens Herbs, I would like to ask about a consultation.')=>'https://wa.me/18484487130?text='+encodeURIComponent(message.replace(/&(?:amp|lt|gt|quot|#39);/g,entity=>({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'"}[entity])));
 const link=(text,href,cls='button')=>`<a class="${cls}" href="${href}">${text}</a>`;
 const chat=(text='Talk to Dr Stevens',message)=>link(text,wa(message));
 const mark='<span class="brand-mark" aria-hidden="true">✳</span>';

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {cloudRequest} from './cloud.mjs';
 const require=createRequire('C:/Users/etiuz/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/package.json');
 const {chromium}=require('playwright');
-const base='http://127.0.0.1:4173';
+const base=process.env.TEST_BASE_URL||'http://127.0.0.1:4173';
 const credentials=fs.readFileSync('storage/admin-login.txt','utf8');
 const email=credentials.match(/Email: (.+)/)[1],password=credentials.match(/Password: (.+)/)[1];
 const browser=await chromium.launch({channel:'msedge',headless:true});

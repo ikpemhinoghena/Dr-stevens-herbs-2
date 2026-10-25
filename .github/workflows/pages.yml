@@ -1,7 +1,5 @@
-name: Deploy GitHub Pages
+name: Legacy static GitHub Pages preview
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

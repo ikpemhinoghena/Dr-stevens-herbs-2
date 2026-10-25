@@ -13,10 +13,11 @@ const equal=(a,b)=>typeof a==='string'&&typeof b==='string'&&Buffer.byteLength(a
 const setupPath=path.join(storage,'setup-key');
 if(!configured()&&!fs.existsSync(setupPath))fs.writeFileSync(setupPath,randomBytes(24).toString('hex'),{mode:0o600});
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const publicCatalogue=()=>listProducts(true).map(({price,currency,sku,revision,updatedAt,status,...product})=>product);
 function refresh(){
  const products=listProducts(true).map(p=>Object.fromEntries(Object.entries(p).map(([k,v])=>[k,typeof v==='string'?escape(v):Array.isArray(v)?v.map(escape):v])));
  buildSite(products,generated);
- fs.writeFileSync(path.join(generated,'assets/catalogue.json'),JSON.stringify(listProducts(true)));
+ fs.writeFileSync(path.join(generated,'assets/catalogue.json'),JSON.stringify(publicCatalogue()));
 }
 let ready;
 function initialize(){return ready||=(async()=>{await syncCloud();refresh()})().catch(error=>{ready=null;throw error})}
@@ -87,7 +88,7 @@ export default async function handler(req,res){
   fail('API route not found.',404);
  }
  if(!['GET','HEAD'].includes(req.method))fail('Method not allowed.',405);
- if(pathname==='/assets/catalogue.json'&&enabled){await syncCloud();return send(res,200,listProducts(true))}
+ if(pathname==='/assets/catalogue.json'&&enabled){await syncCloud();return send(res,200,publicCatalogue())}
  if(enabled&&!pathname.startsWith('/admin/')&&!pathname.startsWith('/assets/')&&!pathname.startsWith('/uploads/')){await syncCloud();refresh();}
  if(pathname==='/admin'){res.writeHead(302,{Location:'/admin/'});return res.end()}
  let file;
