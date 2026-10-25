@@ -1,0 +1,5 @@
+// One source of truth for both the editor and server-side publishing rules.
+export const categories=['Powder Mixture','Botanical Decoction','Botanical Compound','Botanical Infusion','Dried Botanicals','Botanical Oil','Other Botanicals'];
+export const formats=['Powder Mixture','Bottled','Packaged & Bottled','Bottled & Topical','Tea','Dried leaves','Capsules','Oil'];
+export const publishFields={name:'Product name',type:'Format',category:'Category',desc:'Product description',weight:'Pack size',ingredientsInfo:'Ingredients & quality',allergens:'Allergen information',usage:'Usage & preparation',suitability:'Suitability',warnings:'Warnings & precautions',storageInstructions:'Storage instructions',imageAlt:'Photo description'};
+export function publishIssues(product){const issues=Object.entries(publishFields).filter(([field])=>!String(product[field]||'').trim()).map(([field,label])=>({field,label}));if(!product.images?.length)issues.push({field:'photos',label:'At least one product photo'});return issues;}

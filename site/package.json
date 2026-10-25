@@ -1,1 +1,15 @@
-{"name":"dr-stevens-herbs","private":true,"type":"module","scripts":{"build":"node build.mjs","start":"node server.mjs","test":"node verify.mjs"}}
+{
+  "name": "dr-stevens-herbs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node server.mjs",
+    "test": "node verify.mjs",
+    "admin:check": "node --env-file=.env admin-check.mjs",
+    "admin:snapshot": "node --env-file=.env snapshot-admin.mjs"
+  },
+  "engines": {
+    "node": ">=24.14.0"
+  }
+}

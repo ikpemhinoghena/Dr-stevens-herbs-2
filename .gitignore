@@ -1,2 +1,5 @@
 .git-backups/
 pages-dist/
+site/storage/
+site/.env
+site/test-results/

@@ -1,0 +1,10 @@
+.git
+.git-backups
+dist
+pages-dist
+*.tar.gz
+site/.env
+site/storage
+site/test-results
+site/node_modules
+**/*.log

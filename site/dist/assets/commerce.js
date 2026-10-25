@@ -69,3 +69,22 @@ initCheckout();if(catalogue.length)window.renderShoppingBag();
 
 // Suggest the browser's explicitly configured region; never overwrite a chosen country.
 (()=>{const select=document.getElementById('customer-country');if(!select||select.value)return;const names=new Intl.DisplayNames(['en'],{type:'region'});for(const language of navigator.languages||[navigator.language]){try{const region=new Intl.Locale(language).region;if(!region)continue;const name=names.of(region);if([...select.options].some(option=>option.value===name)){select.value=name;const hint=document.getElementById('country-hint');if(hint)hint.textContent='Suggested from your browser region. Please confirm your delivery country.';break}}catch{}}})();
+
+// Save an enquiry only after the visitor explicitly submits the reviewed details.
+if(document.querySelector('#checkout-send')){
+ let savedKey='',requestKey=crypto.randomUUID(),forwarding=false,sending=false;
+ const send=document.querySelector('#checkout-send');
+ send.addEventListener('click',async event=>{
+  if(forwarding)return;event.preventDefault();if(sending||!checkoutReady)return;
+  const details=detailsFromForm(),entries=bagEntries();const snapshot=JSON.stringify({details,items:entries.map(x=>({id:x.product.id,quantity:x.quantity}))});
+  if(savedKey&&savedKey!==snapshot)requestKey=crypto.randomUUID();
+  sending=true;send.setAttribute('aria-disabled','true');const original=send.innerHTML;send.textContent='Saving your enquiry…';
+  try{
+   const response=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({consent:document.querySelector('#checkout-consent').checked,requestKey,details:Object.fromEntries(Object.entries(details).map(([key,value])=>[key.replace('customer-',''),value])),items:entries.map(x=>({id:x.product.id,quantity:x.quantity}))})});
+   const result=await response.json();if(!response.ok)throw Error(result.error||'Could not save your enquiry. Please try again.');
+   savedKey=snapshot;checkoutMessage='ORDER REFERENCE: '+result.id+'\n\n'+orderText(details,entries);document.querySelector('#order-message').textContent=checkoutMessage;send.href=whatsapp(checkoutMessage);
+   const note=document.querySelector('#handoff-note');note.hidden=false;note.replaceChildren();const strong=document.createElement('strong');strong.textContent='Enquiry saved: '+result.id;const p=document.createElement('p');p.textContent='The team will confirm the order details with you. You can also send your message through your chosen contact app.';note.append(strong,p);
+   forwarding=true;send.click();forwarding=false;note.hidden=false;
+  }catch(error){toast(error.message||'Unable to save your enquiry. Please try again.')}finally{sending=false;send.removeAttribute('aria-disabled');send.innerHTML=original}
+ });
+}

@@ -1,8 +1,14 @@
+# Dr Stevens Herbs — website and business dashboard
+
+The website now has a real Supabase-backed business dashboard. See [ADMIN.md](ADMIN.md) for setup, login location, features, testing and Node hosting requirements. Local website: http://127.0.0.1:4173/ · Admin: http://127.0.0.1:4173/admin/.
+
+The older static-site notes below describe the original build. Live product/order management requires the Node server and cannot run on GitHub Pages alone.
+
 # Dr Stevens Herbs
 
 Complete responsive static website with 42 authored routes, a shopping bag, full delivery-details checkout, searchable/filterable collections and WhatsApp order enquiries. No framework dependencies or payment service are required.
 
-Run `npm run build` to regenerate all HTML from `build.mjs`, `experience.mjs`, `components.mjs` and `data.mjs`. Run `npm start` for http://127.0.0.1:3000. Run `npm test` for route and asset verification. `node commerce-check.mjs` checks the full flow using the installed Edge browser and bundled Playwright library. Shared styles and browser behavior live in `dist/assets/` and are tracked source assets; do not delete this directory before building.
+Run `npm run build` to regenerate all HTML from `build.mjs`, `experience.mjs`, `components.mjs` and `data.mjs`. Run `npm start` for http://127.0.0.1:4173. Run `npm test` for route and asset verification. `node commerce-check.mjs` checks the full flow using the installed Edge browser and bundled Playwright library. Shared styles and browser behavior live in `dist/assets/` and are tracked source assets; do not delete this directory before building.
 
 ## Catalogue and launch
 
