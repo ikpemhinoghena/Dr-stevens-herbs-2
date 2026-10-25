@@ -1,7 +1,7 @@
 import {randomBytes} from 'node:crypto';
 import {db,listProducts} from './store.mjs';
 import {enabled,cloudRequest} from './cloud.mjs';
-db.exec(`CREATE TABLE IF NOT EXISTS orders(id TEXT PRIMARY KEY,body TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 1,created_at TEXT NOT NULL);
+db?.exec(`CREATE TABLE IF NOT EXISTS orders(id TEXT PRIMARY KEY,body TEXT NOT NULL,revision INTEGER NOT NULL DEFAULT 1,created_at TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS order_requests(request_key TEXT PRIMARY KEY,order_id TEXT NOT NULL);`);
 export const statuses=['new','confirmed','preparing','in_transit','delivered','cancelled'];
 export async function orders(){if(enabled){const rows=await cloudRequest('/rest/v1/orders?select=*&order=created_at.desc');return rows.map(r=>({...r.body,id:r.id,revision:r.revision,createdAt:r.created_at}))}return db.prepare('SELECT * FROM orders ORDER BY created_at DESC').all().map(r=>({...JSON.parse(r.body),id:r.id,revision:r.revision,createdAt:r.created_at}));}

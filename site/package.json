@@ -7,9 +7,10 @@
     "start": "node server.mjs",
     "test": "node verify.mjs",
     "admin:check": "node --env-file=.env admin-check.mjs",
-    "admin:snapshot": "node --env-file=.env snapshot-admin.mjs"
+    "admin:snapshot": "node --env-file=.env snapshot-admin.mjs",
+    "build:vercel": "node build-vercel.mjs"
   },
   "engines": {
-    "node": ">=24.14.0"
+    "node": "24.x"
   }
 }

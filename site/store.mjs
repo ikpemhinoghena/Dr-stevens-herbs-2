@@ -1,4 +1,4 @@
-import {DatabaseSync} from 'node:sqlite';
+import {tmpdir} from 'node:os';
 import fs from 'node:fs';
 import path from 'node:path';
 import {randomBytes,scryptSync,timingSafeEqual} from 'node:crypto';
@@ -6,10 +6,10 @@ import {products as seeds} from './data.mjs';
 import {enabled,cloudProducts,saveCloud,isCloudPhoto} from './cloud.mjs';
 import {categories,formats,publishIssues} from './catalogue-options.mjs';
 
-export const storage=path.resolve(process.env.DATA_DIR||'storage');
+export const storage=path.resolve(process.env.DATA_DIR||(process.env.VERCEL?path.join(tmpdir(),'dr-stevens-runtime'):'storage'));
 fs.mkdirSync(path.join(storage,'uploads'),{recursive:true});
-export const db=new DatabaseSync(path.join(storage,'catalogue.sqlite'));
-db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
+export const db=enabled?null:new (await import('node:sqlite')).DatabaseSync(path.join(storage,'catalogue.sqlite'));
+db?.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
  CREATE TABLE IF NOT EXISTS products(id TEXT PRIMARY KEY, body TEXT NOT NULL, status TEXT NOT NULL CHECK(status IN ('draft','published','archived')), revision INTEGER NOT NULL DEFAULT 1, updated_at TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS settings(key TEXT PRIMARY KEY,value TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,expires INTEGER NOT NULL);
@@ -17,11 +17,11 @@ db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=50
  CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY,action TEXT NOT NULL,product_id TEXT,created_at TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS attempts(address TEXT PRIMARY KEY,count INTEGER NOT NULL,expires INTEGER NOT NULL);`);
 const now=()=>new Date().toISOString();
-if(!db.prepare("SELECT value FROM settings WHERE key='seeded'").get()){
+if(db&&!db.prepare("SELECT value FROM settings WHERE key='seeded'").get()){
  db.exec('BEGIN');
  try{for(const p of seeds)db.prepare('INSERT INTO products VALUES(?,?,?,?,?)').run(p.id,JSON.stringify(p),'published',1,now());db.prepare('INSERT INTO settings VALUES(?,?)').run('seeded','yes');db.exec('COMMIT')}catch(e){db.exec('ROLLBACK');throw e}
 }
-export const configured=()=>!!db.prepare("SELECT value FROM settings WHERE key='password'").get();
+export const configured=()=>enabled||!!db.prepare("SELECT value FROM settings WHERE key='password'").get();
 export function setPassword(password){
  if(typeof password!=='string'||password.length<12||password.length>200)throw Error('Choose a password of 12 to 200 characters.');
  const salt=randomBytes(16).toString('hex');

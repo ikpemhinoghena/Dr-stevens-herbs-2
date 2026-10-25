@@ -23,6 +23,6 @@ export async function loginCloud(email,password){
  if(typeof email!=='string'||typeof password!=='string'||password.length>200)return false;
  const response=await fetch(project+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:key,'Content-Type':'application/json'},body:JSON.stringify({email,password}),signal:AbortSignal.timeout(15000)});
  if(!response.ok)return false;const token=await response.json();if(!token.user?.id)return false;
- const allowed=await request('/rest/v1/product_admins?user_id=eq.'+encodeURIComponent(token.user.id)+'&select=user_id');return allowed.length===1;
+ const allowed=await request('/rest/v1/product_admins?user_id=eq.'+encodeURIComponent(token.user.id)+'&select=user_id');return allowed.length===1?token.user.id:false;
 }
 export async function importProducts(products){return request('/rest/v1/products',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates'},body:JSON.stringify(products.map(p=>({id:p.id,body:p,status:'published'})))});}

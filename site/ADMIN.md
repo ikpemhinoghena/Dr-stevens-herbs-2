@@ -27,7 +27,7 @@ Admin sign-in uses Supabase Auth. A user must also be in `public.product_admins`
 - **Inventory:** SKU, optional stock counts, low-stock filters, out-of-stock checks and internal reference prices. Blank stock means untracked. Stock is managed manually; enquiries do not reserve or automatically deduct it. Checkout rejects quantities exceeding recorded stock. Reference prices do not create an online payment or change the enquiry-only sales process.
 - **Analytics:** 7/30/90-day enquiry trends, requested units, delivery counts, delivery rate, most-requested products and manually recorded paid totals separated by currency. These are order metrics, not visitor analytics or payment verification.
 - **Activity:** chronological order milestones, workspace search (Ctrl/Cmd K) and attention indicators for new enquiries and low stock.
-- **Settings:** business name and reply email used when preparing customer messages; administrator access and database connection details. These communication preferences are stored locally in the server's SQLite settings database; persist `storage/` across server deployments to retain them.
+- **Settings:** business name and reply email used when preparing customer messages; administrator access and database connection details. Communication preferences, administrator sessions and shared rate limits are stored in Supabase when cloud mode is enabled.
 
 Changing an order status saves it and records history. WhatsApp/email buttons prepare a message using the saved status and shipping details. Review and send in the chosen app. Nothing is automatically sent. There is no external delivery receipt or open/click tracking. Recording payment is a manual note, not proof that money was received.
 
@@ -35,11 +35,11 @@ Checkout saves an enquiry only when the customer explicitly submits the reviewed
 
 ## Deploy publicly
 
-Supabase hosts the database, Auth and photos; it does not host this Node application. GitHub Pages and a static Sites upload cannot run the new server API. Deploy `site/server.mjs` on a Node-capable host. Set `HOST=0.0.0.0`, the host's `PORT`, `DATA_BACKEND=supabase`, the two Supabase variables, `NODE_ENV=production`, and `PUBLIC_ORIGIN=https://your-actual-domain`. Put HTTPS in front of the app. The production origin controls CSRF checks and secure cookies. Persist `storage/` for local settings, rate limits and sessions. Public product pages are rebuilt from Supabase when the process starts and after changes, with periodic reads for changes made in another instance.
+Supabase hosts the database, Auth and photos; it does not host this Node application. GitHub Pages and a static Sites upload cannot run the new server API. Vercel is supported through `api/index.mjs` and `vercel.json`; `npm run build:vercel` publishes CDN assets while pages and API routes are handled by the function. Deploy `site/server.mjs` on a Node-capable host. Set `HOST=0.0.0.0`, the host's `PORT`, `DATA_BACKEND=supabase`, the two Supabase variables, `NODE_ENV=production`, and `PUBLIC_ORIGIN=https://your-actual-domain`. Put HTTPS in front of the app. The production origin controls CSRF checks and secure cookies. In Supabase mode no persistent local volume is required: the only runtime disk writes are a rebuildable page cache (under `/tmp` on Vercel). Public product pages are rebuilt from Supabase when the process starts and after changes, with periodic reads for changes made in another instance.
 
-A Dockerfile at the repository root packages the Node app for a container host. Its build excludes local secrets, credentials and database files. Supply secrets through the host’s environment settings, and mount a persistent volume at `/app/storage`.
+A Dockerfile at the repository root packages the Node app for a container host. Its build excludes local secrets, credentials and database files. Supply secrets through the host’s environment settings, and use a persistent volume only if you deliberately select local SQLite mode. Production requires Supabase.
 
-Do not publish the local preview URL as a public URL. No public deployment has been made by this implementation.
+Do not publish the local preview URL as a public URL. The production deployment is managed in the organization’s Vercel project. Keep `PUBLIC_ORIGIN` equal to the canonical HTTPS website origin and configure `ALLOWED_ORIGINS` for additional owned aliases. Vercel’s exact deployment and branch URLs are allowed automatically for preview testing.
 
 ## Verification
 
@@ -47,6 +47,8 @@ Do not publish the local preview URL as a public URL. No public deployment has b
 
 `npm test` verifies the generated static routes/assets. `node --env-file=.env snapshot-admin.mjs` checks sign-in and renders a screenshot without creating product/order records. `node --env-file=.env admin-check.mjs` runs the end-to-end Supabase workflow; **run only in an explicitly authorized test project/workflow**. It creates labelled QA product/photo/order records, does not send messages, and removes only those exact records afterward. Screenshots go to ignored `test-results/`.
 
-For a fresh database run the schema, then `node --env-file=.env bootstrap-cloud.mjs` once. It preserves existing products and existing Auth users. A newly created initial admin's credentials are written to ignored local storage. `import-supabase.mjs` imports catalogue products without replacing rows already present.
+For a fresh database run `supabase/schema.sql` and `supabase/runtime-state.sql`, then `node --env-file=.env bootstrap-cloud.mjs` once. It preserves existing products and existing Auth users. A newly created initial admin's credentials are written to ignored local storage. `import-supabase.mjs` imports catalogue products without replacing rows already present.
 
 Back up your Supabase database separately and arrange a retention/deletion policy for real customer records before public launch. The free plan does not include automatic database backups.
+
+`node --env-file=.env serverless-check.mjs` tests two independent Vercel-style processes: both share the same Supabase session, logout is propagated, and neither opens SQLite. Photo uploads are limited to 4 MB to stay below Vercel’s request limit.

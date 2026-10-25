@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "{admin/**,dist/**,*.mjs}",
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    { "src": "/assets/catalogue\\.json", "dest": "/api/index.mjs" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/api/index.mjs" }
+  ]
+}
